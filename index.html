@@ -15,27 +15,33 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			justify-content: center;
 			min-height: 100vh;
 		}
 		.container {
-			max-width: 600px;
+			max-width: 800px;
 			width: 100%;
 			background-color: #333;
-			padding: 20px;
+			padding: 40px;
 			border-radius: 5px;
 			box-sizing: border-box;
+			text-align: center;
 		}
 		.header {
-			text-align: center;
 			margin-bottom: 20px;
+			text-align: center;
 		}
 		.header h1 {
 			margin: 0;
+			line-height: 1.2;
+			white-space: nowrap;
+			text-align: center;
 		}
 		.header p {
 			margin: 5px 0 0;
-			font-size: 0.9em;
+			font-size: 0.8em;
 			color: #ccc;
+			text-align: center;
 		}
 		input, select, button {
 			padding: 5px 10px;
@@ -44,7 +50,7 @@
 		}
 		.input-row {
 			display: flex;
-			justify-content: flex-start;
+			justify-content: center;
 			align-items: center;
 			margin-bottom: 10px;
 		}
@@ -54,17 +60,19 @@
 			margin-right: 10px;
 		}
 		.output-section {
-			text-align: left;
+			text-align: center;
 			margin-top: 20px;
 			max-width: 500px;
+			margin-left: auto;
+			margin-right: auto;
 		}
 		.output-section h2 {
 			text-align: center;
 		}
 		.output-section p {
-			margin: 5px 0;
+			margin: 10px 0;
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 			align-items: center;
 		}
 		.output-section p span:first-child {
@@ -87,7 +95,7 @@
 		}
 		@media (max-width: 600px) {
 			.container {
-				padding: 10px;
+				padding: 20px;
 			}
 			.input-row label {
 				width: 150px;
@@ -98,86 +106,89 @@
 <body>
 	<div class="container">
 		<div class="header">
-			<img src="https://www.insularlife.com.ph/assets/img/logos/logo.png" alt="Insular Life Logo" width="200">
 			<h1>Abundance 65 Payout Calculator</h1>
 			<p>Created by Gabriel Angelo C. Villar with the help of Claude.ai</p>
-			<p>Calculator to figure out the count of periodic payouts and their total, the final policy year and the final payout amount on maturity, and the maturity year and overall payout amount. It shows the actual periodic payout years, too!</p>
+			<p style="font-size: 0.7em;">a calculator to figure out the count of periodic payouts and their total, the final policy year and the final payout amount on maturity, and the maturity year and overall payout amount. It shows the actual periodic payout years, too!</p>
 		</div>
-		<p style="text-align: center;">Enter policy details below:</p>
+		<p>Enter policy details below:</p>
 		<div class="input-row">
 			<label for="coverageAmount">Coverage:</label>
-			<input type="number" id="coverageAmount" placeholder="e.g. 100000" required>
+			<input type="text" id="coverageAmount" placeholder="e.g. 100000" required pattern="[0-9,]*" oninput="formatCoverageAmount.call(this)">
 		</div>
 		<div class="input-row">
 			<label>Insured's Birthdate:</label>
-			<select id="birthMonth" required>
-				<option value="">Month</option>
-				<option value="1">Jan</option>
-				<option value="2">Feb</option>
-				<option value="3">Mar</option>
-				<option value="4">Apr</option>
-				<option value="5">May</option>
-				<option value="6">Jun</option>
-				<option value="7">Jul</option>
-				<option value="8">Aug</option>
-				<option value="9">Sep</option>
-				<option value="10">Oct</option>
-				<option value="11">Nov</option>
-				<option value="12">Dec</option>
-			</select>
-			<select id="birthYear" required>
-				<option value="">Year</option>
-				<?php
-				$currentYear = date('Y');
-				for ($year = $currentYear; $year >= 1940; $year--) {
-					echo "<option value='$year'>$year</option>";
-				}
-				?>
-			</select>
+			<div>
+				<select id="birthMonth" required>
+					<option value="">Month</option>
+					<option value="1">Jan</option>
+					<option value="2">Feb</option>
+					<option value="3">Mar</option>
+					<option value="4">Apr</option>
+					<option value="5">May</option>
+					<option value="6">Jun</option>
+					<option value="7">Jul</option>
+					<option value="8">Aug</option>
+					<option value="9">Sep</option>
+					<option value="10">Oct</option>
+					<option value="11">Nov</option>
+					<option value="12">Dec</option>
+				</select>
+				<input type="text" id="birthYear" placeholder="YYYY" pattern="\d{4}" required>
+			</div>
 		</div>
 		<div class="input-row">
 			<label>Policy Start:</label>
-			<select id="policyStartMonth" required>
-				<option value="">Month</option>
-				<option value="1">Jan</option>
-				<option value="2">Feb</option>
-				<option value="3">Mar</option>
-				<option value="4">Apr</option>
-				<option value="5">May</option>
-				<option value="6">Jun</option>
-				<option value="7">Jul</option>
-				<option value="8">Aug</option>
-				<option value="9">Sep</option>
-				<option value="10">Oct</option>
-				<option value="11">Nov</option>
-				<option value="12">Dec</option>
-			</select>
-			<select id="policyStartYear" required>
-				<option value="">Year</option>
-				<?php
-				$currentYear = date('Y');
-				for ($year = $currentYear; $year >= 1940; $year--) {
-					echo "<option value='$year'>$year</option>";
-				}
-				?>
-			</select>
+			<div>
+				<select id="policyStartMonth" required>
+					<option value="">Month</option>
+					<option value="1">Jan</option>
+					<option value="2">Feb</option>
+					<option value="3">Mar</option>
+					<option value="4">Apr</option>
+					<option value="5">May</option>
+					<option value="6">Jun</option>
+					<option value="7">Jul</option>
+					<option value="8">Aug</option>
+					<option value="9">Sep</option>
+					<option value="10">Oct</option>
+					<option value="11">Nov</option>
+					<option value="12">Dec</option>
+				</select>
+				<input type="text" id="policyStartYear" placeholder="YYYY" pattern="\d{4}" required>
+			</div>
 		</div>
-		<button onclick="calculatePayouts()">Calculate Payouts</button>
+		<button style="margin-top: 10px;">Calculate!</button>
 		<div id="output" class="output-section">
 			<h2>Policy Payouts</h2>
 		</div>
 	</div>
 
 	<script>
+		function formatCoverageAmount() {
+			let value = this.value.replace(/,/g, '');
+			let formattedValue = '';
+			for (let i = 0; i < value.length; i++) {
+				if (i !== 0 && i % 3 === 0) {
+					formattedValue = ',' + formattedValue;
+				}
+				formattedValue = value[value.length - 1 - i] + formattedValue;
+			}
+			this.value = formattedValue;
+		}
+
+		function formatNumber(number) {
+			return number.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+		}
+
 		function calculatePayouts() {
-			const coverageAmount = parseFloat(document.getElementById("coverageAmount").value);
+			const coverageAmount = parseFloat(document.getElementById("coverageAmount").value.replace(/,/g, ''));
 			const birthMonth = parseInt(document.getElementById("birthMonth").value);
 			const birthYear = parseInt(document.getElementById("birthYear").value);
 			const policyStartMonth = parseInt(document.getElementById("policyStartMonth").value);
 			const policyStartYear = parseInt(document.getElementById("policyStartYear").value);
 
 			if (isNaN(coverageAmount) || isNaN(birthMonth) || isNaN(birthYear) || isNaN(policyStartMonth) || isNaN(policyStartYear)) {
-				document.getElementById("output").innerHTML = "<p style='text-align: center;'>Please enter valid numbers for all fields.</p>";
+				document.getElementById("output").innerHTML = "<p>Please enter valid numbers for all fields.</p>";
 				return;
 			}
 
@@ -200,10 +211,6 @@
 			const finalPayoutAmount = coverageAmount;
 			const totalPayouts = periodicPayoutsTotal + finalPayoutAmount;
 
-			function formatNumber(number) {
-				return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-			}
-
 			let output = "";
 			output += `<p><span>Count of Periodic Payouts:</span><span>${periodicPayoutsCount}</span></p>`;
 			output += `<p><span>Total Sum of Periodic Payouts:</span><span>${formatNumber(periodicPayoutsTotal)}</span></p>`;
@@ -219,6 +226,9 @@
 
 			document.getElementById("output").innerHTML = output;
 		}
+
+		const calculateButton = document.querySelector('button');
+		calculateButton.addEventListener('click', calculatePayouts);
 	</script>
 </body>
 </html>

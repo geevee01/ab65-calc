@@ -1,234 +1,358 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Abundance 65 Payout Calculator</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap" rel="stylesheet">
-	<style>
-		body {
-			font-family: 'Chivo Mono', monospace;
-			background-color: #1c1c1c;
-			color: #fff;
-			padding: 20px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			min-height: 100vh;
-		}
-		.container {
-			max-width: 800px;
-			width: 100%;
-			background-color: #333;
-			padding: 40px;
-			border-radius: 5px;
-			box-sizing: border-box;
-			text-align: center;
-		}
-		.header {
-			margin-bottom: 20px;
-			text-align: center;
-		}
-		.header h1 {
-			margin: 0;
-			line-height: 1.2;
-			white-space: nowrap;
-			text-align: center;
-		}
-		.header p {
-			margin: 5px 0 0;
-			font-size: 0.8em;
-			color: #ccc;
-			text-align: center;
-		}
-		input, select, button {
-			padding: 5px 10px;
-			margin: 5px;
-			font-family: inherit;
-		}
-		.input-row {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-bottom: 10px;
-		}
-		.input-row label {
-			width: 200px;
-			text-align: right;
-			margin-right: 10px;
-		}
-		.output-section {
-			text-align: center;
-			margin-top: 20px;
-			max-width: 500px;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.output-section h2 {
-			text-align: center;
-		}
-		.output-section p {
-			margin: 10px 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.output-section p span:first-child {
-			text-align: right;
-			margin-right: 10px;
-			flex: 1;
-		}
-		.output-section p span:last-child {
-			text-align: left;
-			flex: 1;
-		}
-		.output-section table {
-			border-collapse: collapse;
-			margin-top: 10px;
-			width: 100%;
-		}
-		.output-section th, .output-section td {
-			padding: 5px 10px;
-			border: 1px solid #ccc;
-		}
-		@media (max-width: 600px) {
-			.container {
-				padding: 20px;
-			}
-			.input-row label {
-				width: 150px;
-			}
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>Abundance 65 Payout Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+
+body {
+    font-family: 'Chivo Mono', monospace;
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #333;
+    padding: 40px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.header p {
+    margin: 5px 0 0;
+    font-size: 0.8em;
+    color: #ccc;
+    text-align: center;
+}
+
+input, select, button {
+    padding: 5px 10px;
+    margin: 5px;
+    font-family: inherit;
+}
+
+.input-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.input-row label {
+    width: 200px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.output-section {
+    text-align: center;
+    margin-top: 20px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.output-section h2 {
+    text-align: center;
+}
+
+.output-section p {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.output-section p span:first-child {
+    text-align: right;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.output-section p span:last-child {
+    text-align: left;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.output-section table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.output-section th, .output-section td {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    text-align: center;
+}
+
+.output-section th:first-child, .output-section td:first-child {
+    text-align: right;
+    width: 60%;
+}
+
+.output-section th:last-child, .output-section td:last-child {
+    text-align: left;
+    width: 40%;
+}
+
+.policy-payouts-table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.policy-payouts-table th, .policy-payouts-table td {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.policy-payouts-table th:first-child, .policy-payouts-table td:first-child {
+    text-align: right;
+    width: 60%;
+}
+
+.policy-payouts-table th:last-child, .policy-payouts-table td:last-child {
+    text-align: left;
+    width: 40%;
+}
+
+.periodic-payouts-table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.periodic-payouts-table th, .periodic-payouts-table td {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    .input-row label {
+        width: 150px;
+    }
+}
+
+    </style>
+    
 </head>
 <body>
-	<div class="container">
-		<div class="header">
-			<h1>Abundance 65 Payout Calculator</h1>
-			<p>Created by Gabriel Angelo C. Villar with the help of Claude.ai</p>
-			<p style="font-size: 0.7em;">a calculator to figure out the count of periodic payouts and their total, the final policy year and the final payout amount on maturity, and the maturity year and overall payout amount. It shows the actual periodic payout years, too!</p>
-		</div>
-		<p>Enter policy details below:</p>
-		<div class="input-row">
-			<label for="coverageAmount">Coverage:</label>
-			<input type="text" id="coverageAmount" placeholder="e.g. 100000" required pattern="[0-9,]*" oninput="formatCoverageAmount.call(this)">
-		</div>
-		<div class="input-row">
-			<label>Insured's Birthdate:</label>
-			<div>
-				<select id="birthMonth" required>
-					<option value="">Month</option>
-					<option value="1">Jan</option>
-					<option value="2">Feb</option>
-					<option value="3">Mar</option>
-					<option value="4">Apr</option>
-					<option value="5">May</option>
-					<option value="6">Jun</option>
-					<option value="7">Jul</option>
-					<option value="8">Aug</option>
-					<option value="9">Sep</option>
-					<option value="10">Oct</option>
-					<option value="11">Nov</option>
-					<option value="12">Dec</option>
-				</select>
-				<input type="text" id="birthYear" placeholder="YYYY" pattern="\d{4}" required>
-			</div>
-		</div>
-		<div class="input-row">
-			<label>Policy Start:</label>
-			<div>
-				<select id="policyStartMonth" required>
-					<option value="">Month</option>
-					<option value="1">Jan</option>
-					<option value="2">Feb</option>
-					<option value="3">Mar</option>
-					<option value="4">Apr</option>
-					<option value="5">May</option>
-					<option value="6">Jun</option>
-					<option value="7">Jul</option>
-					<option value="8">Aug</option>
-					<option value="9">Sep</option>
-					<option value="10">Oct</option>
-					<option value="11">Nov</option>
-					<option value="12">Dec</option>
-				</select>
-				<input type="text" id="policyStartYear" placeholder="YYYY" pattern="\d{4}" required>
-			</div>
-		</div>
-		<button style="margin-top: 10px;">Calculate!</button>
-		<div id="output" class="output-section">
-			<h2>Policy Payouts</h2>
-		</div>
-	</div>
+    <div class="container">
+        <div class="header">
+            <h1>Abundance 65 Payout Calculator</h1>
+            <p>Created by Gabriel Angelo C. Villar with the help of Claude.ai</p>
+            <p style="font-size: 0.7em;">a calculator to figure out the count of periodic payouts and their total, the final policy year and the final payout amount on maturity, and the maturity year and overall payout amount. It shows the actual periodic payout years, too!</p>
+        </div>
+        <p>Enter policy details below:</p>
+        <div class="input-row">
+            <label for="coverageAmount">Coverage:</label>
+            <input type="text" id="coverageAmount" placeholder="e.g. 100000" required pattern="[0-9,]*" oninput="formatCoverageAmount.call(this)">
+        </div>
+        <div class="input-row">
+            <label>Insured's Birthdate:</label>
+            <div>
+                <select id="birthMonth" required>
+                    <option value="">Month</option>
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+                <input type="text" id="birthYear" placeholder="YYYY" pattern="\d{4}" required>
+            </div>
+        </div>
+        <div class="input-row">
+            <label>Policy Start:</label>
+            <div>
+                <select id="policyStartMonth" required>
+                    <option value="">Month</option>
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+                <input type="text" id="policyStartYear" placeholder="YYYY" pattern="\d{4}" required>
+            </div>
+        </div>
+        <button style="margin-top: 10px;">Calculate!</button>
+        <div id="output" class="output-section"></div>
+    </div>
 
-	<script>
-		function formatCoverageAmount() {
-			let value = this.value.replace(/,/g, '');
-			let formattedValue = '';
-			for (let i = 0; i < value.length; i++) {
-				if (i !== 0 && i % 3 === 0) {
-					formattedValue = ',' + formattedValue;
-				}
-				formattedValue = value[value.length - 1 - i] + formattedValue;
-			}
-			this.value = formattedValue;
-		}
+    <script>
+        
+        // Function to format the coverage amount input with commas
+function formatCoverageAmount() {
+    let value = this.value.replace(/,/g, '');
+    let formattedValue = '';
+    for (let i = 0; i < value.length; i++) {
+        if (i !== 0 && i % 3 === 0) {
+            formattedValue = ',' + formattedValue;
+        }
+        formattedValue = value[value.length - 1 - i] + formattedValue;
+    }
+    this.value = formattedValue;
+}
 
-		function formatNumber(number) {
-			return number.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-		}
+// Function to format a number with commas and rounding
+function formatNumber(number) {
+    const roundedNumber = Math.round(number / 100) * 100;
+    return roundedNumber.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
 
-		function calculatePayouts() {
-			const coverageAmount = parseFloat(document.getElementById("coverageAmount").value.replace(/,/g, ''));
-			const birthMonth = parseInt(document.getElementById("birthMonth").value);
-			const birthYear = parseInt(document.getElementById("birthYear").value);
-			const policyStartMonth = parseInt(document.getElementById("policyStartMonth").value);
-			const policyStartYear = parseInt(document.getElementById("policyStartYear").value);
+// Function to calculate payouts
+function calculatePayouts() {
+    const coverageAmount = parseFloat(document.getElementById("coverageAmount").value.replace(/,/g, ''));
+    const birthMonth = parseInt(document.getElementById("birthMonth").value);
+    const birthYear = parseInt(document.getElementById("birthYear").value);
+    const policyStartMonth = parseInt(document.getElementById("policyStartMonth").value);
+    const policyStartYear = parseInt(document.getElementById("policyStartYear").value);
 
-			if (isNaN(coverageAmount) || isNaN(birthMonth) || isNaN(birthYear) || isNaN(policyStartMonth) || isNaN(policyStartYear)) {
-				document.getElementById("output").innerHTML = "<p>Please enter valid numbers for all fields.</p>";
-				return;
-			}
+    // Check if all fields are valid
+    if (isNaN(coverageAmount) || isNaN(birthMonth) || isNaN(birthYear) || isNaN(policyStartMonth) || isNaN(policyStartYear)) {
+        document.getElementById("output").innerHTML = "<p>Please enter valid numbers for all fields.</p>";
+        return;
+    }
 
-			const periodicPayoutYears = [];
-			const periodicPayoutAmount = coverageAmount * 0.1;
-			let periodicPayoutsCount = 0;
-			let periodicPayoutsTotal = 0;
+    // Calculate total premium percentage based on coverage amount
+    let totalPremiumPercentage;
+    if (coverageAmount <= 499999.99) {
+        totalPremiumPercentage = 222.24;
+    } else if (coverageAmount >= 500000 && coverageAmount <= 999999.99) {
+        totalPremiumPercentage = 187.20;
+    } else {
+        totalPremiumPercentage = 161.04;
+    }
 
-			const birthDate = new Date(birthYear, birthMonth - 1);
-			const policyStartDate = new Date(policyStartYear, policyStartMonth - 1);
-			const insuranceEndYear = birthDate.getFullYear() + 65;
-			const finalPayoutYear = insuranceEndYear;
+    // Calculate premiums
+    const monthlyPremium = (coverageAmount * (totalPremiumPercentage / 100)) / (10 * 12);
+    const quarterlyPremium = (monthlyPremium - (monthlyPremium * 0.0769353395)) * 3;
+    const semiAnnualPremium = (monthlyPremium - (monthlyPremium * 0.0941390742)) * 6;
+    const annualPremium = (monthlyPremium - (monthlyPremium * 0.1454001126)) * 12;
 
-			for (let year = policyStartYear + 11; year < insuranceEndYear; year += 2) {
-				periodicPayoutYears.push(year);
-				periodicPayoutsCount++;
-				periodicPayoutsTotal += periodicPayoutAmount;
-			}
+    // Generate premiums output
+    let premiumsOutput = "<h2>Premiums</h2>";
+    premiumsOutput += "<table><tr><th>Monthly</th><th>Quarterly</th><th>Semi-Annual</th><th>Annual</th></tr>";
+    premiumsOutput += `<tr><td>${formatNumber(monthlyPremium)}</td><td>${formatNumber(quarterlyPremium)}</td><td>${formatNumber(semiAnnualPremium)}</td><td>${formatNumber(annualPremium)}</td></tr>`;
+    premiumsOutput += "</table>";
 
-			const finalPayoutAmount = coverageAmount;
-			const totalPayouts = periodicPayoutsTotal + finalPayoutAmount;
+    // Calculate policy payouts
+    const periodicPayoutYears = [];
+    const periodicPayoutAmount = coverageAmount * 0.1;
+    let periodicPayoutsCount = 0;
+    let periodicPayoutsTotal = 0;
 
-			let output = "";
-			output += `<p><span>Count of Periodic Payouts:</span><span>${periodicPayoutsCount}</span></p>`;
-			output += `<p><span>Total Sum of Periodic Payouts:</span><span>${formatNumber(periodicPayoutsTotal)}</span></p>`;
-			output += `<p><span>Final Policy Year:</span><span>${finalPayoutYear}</span></p>`;
-			output += `<p><span>Final Payout:</span><span>${formatNumber(finalPayoutAmount)}</span></p>`;
-			output += `<p><span>Total of Periodic and Final Payouts:</span><span>${formatNumber(totalPayouts)}</span></p>`;
-			output += "<p style='text-align: center;'>Years of Periodic Payouts:</p>";
-			output += "<table><tr><th>Count</th><th>Year</th></tr>";
-			periodicPayoutYears.forEach((year, index) => {
-				output += `<tr><td>${index + 1}</td><td>${year}</td></tr>`;
-			});
-			output += "</table>";
+    const birthDate = new Date(birthYear, birthMonth - 1);
+    const policyStartDate = new Date(policyStartYear, policyStartMonth - 1);
+    const insuranceEndYear = birthDate.getFullYear() + 65;
+    const finalPayoutYear = insuranceEndYear;
 
-			document.getElementById("output").innerHTML = output;
-		}
+    for (let year = policyStartYear + 11; year < insuranceEndYear; year += 2) {
+        periodicPayoutYears.push(year);
+        periodicPayoutsCount++;
+        periodicPayoutsTotal += periodicPayoutAmount;
+    }
 
-		const calculateButton = document.querySelector('button');
-		calculateButton.addEventListener('click', calculatePayouts);
-	</script>
+    const finalPayoutAmount = coverageAmount;
+    const totalPayouts = periodicPayoutsTotal + finalPayoutAmount;
+
+    // Generate policy payouts output
+    let payoutsOutput = `<h2>Policy Payouts</h2>
+    <table class="policy-payouts-table">
+        <tr>
+            <th>Count of Periodic Payouts</th>
+            <td>${periodicPayoutsCount}</td>
+        </tr>
+        <tr>
+            <th>Total Sum of Periodic Payouts</th>
+            <td>${formatNumber(periodicPayoutsTotal)}</td>
+        </tr>
+        <tr>
+            <th>Final Policy Year</th>
+            <td>${finalPayoutYear}</td>
+        </tr>
+        <tr>
+            <th>Final Payout</th>
+            <td>${formatNumber(finalPayoutAmount)}</td>
+        </tr>
+        <tr>
+            <th>Total of Periodic and Final Payouts</th>
+            <td>${formatNumber(totalPayouts)}</td>
+        </tr>
+    </table>`;
+
+    // Generate periodic payouts output
+    let periodicPayoutsOutput = `<h2>Years of Periodic Payouts</h2>
+    <table class="periodic-payouts-table">
+        <tr>
+            <th>Count</th>
+            <th>Year</th>
+        </tr>`;
+
+    periodicPayoutYears.forEach((year, index) => {
+        periodicPayoutsOutput += `<tr><td>${index + 1}</td><td>${year}</td></tr>`;
+    });
+
+    periodicPayoutsOutput += "</table>";
+
+    // Display the output
+    document.getElementById("output").innerHTML = payoutsOutput + periodicPayoutsOutput;
+}
+
+// Event listener for the calculate button
+const calculateButton = document.querySelector('button');
+calculateButton.addEventListener('click', calculatePayouts);
+
+    </script>
+    
 </body>
 </html>
